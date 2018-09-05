@@ -1,0 +1,19 @@
+{
+  "name": "csharpsocketapp",
+  "version": "1.0.0",
+  "description": "A Socket.io app that allows connections from C# desktop application.",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.16.3",
+    "react": "^16.4.0",
+    "react-contextmenu": "^2.9.2",
+    "react-dom": "^16.4.0",
+    "socket.io": "^2.1.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hunter Stockdill",
+  "license": "MIT"
+}

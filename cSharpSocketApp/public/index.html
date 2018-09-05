@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>C# and Socket.io App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<h1>C# and Socket.io App</h1>
+<div class="container">
+    <h2>Default Viewer</h2>
+    <hr>
+    <form id="send-message" class="form-inline" action="">
+        <textarea readonly class="form-control" rows="5" id="chatbox"></textarea>
+        <input id="textbox" class="form-control" type="text" autocomplete="off">
+        <button class="btn btn-primary">Send</button>
+    </form>
+    <hr>
+    <h2>Users Connected</h2>
+    <div id="userDiv">
+
+    </div>>
+    <hr>
+    <div>
+        <h2>Screenshots</h2>
+        <img id="screenshot" src="" alt="" />
+        <form id="screenshot-form" class="form-inline" action="">
+            <button class="btn btn-secondary">Grab Screenshot</button>
+        </form>
+    </div> 
+</div>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+<script>
+
+    $(function () {
+        var socket = io();
+        
+        var chatbox = $('#chatbox');
+        var textbox = $('#textbox');
+        
+
+        // Prompt for username
+        var myUsername = prompt("Please enter your username", "");
+
+        if (myUsername != null){
+            socket.emit('new user', myUsername, function(data){
+                if(data){
+                    
+                }else{
+                    console.log("username already taken");
+                }
+            });
+        }
+
+        socket.on('usernames', function(data){
+            $('#userDiv').html('');
+            var html = '';
+            for(i=0; i < data.length; i++){
+                html += data[i] + '<br/>'
+            }
+            $('#userDiv').html(html);
+        });
+
+        // Messaging Area
+        $('#send-message').submit(function(event){
+            event.preventDefault();
+            if(textbox.val().length !== 0){
+                socket.emit('new message', {usr: myUsername, msg: textbox.val()});
+                textbox.val('');
+            }
+        });
+        socket.on('new message', function(data){
+            chatbox.val(chatbox.val() + data.usr + ": " + data.msg + '\n');
+            chatbox.scrollTop(chatbox[0].scrollHeight);
+        });
+        
+        // Screenshot Area
+        var screenshot = $('#screenshot');
+        screenshot.hide();
+
+        $('#screenshot-form').submit(function(event){
+            event.preventDefault();
+            socket.emit('command', 'screengrab');
+        });
+
+        socket.on('screenshot', function(data){
+            screenshot.attr('src', data);
+            if(screenshot.is(":visible") != true){
+                screenshot.show();
+            }
+        });
+    });
+    
+</script>
+
+</body>
+</html>

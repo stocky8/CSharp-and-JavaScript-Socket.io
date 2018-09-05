@@ -1,0 +1,75 @@
+body{
+    background-color: darkslategrey;
+}
+
+.container{
+    background-color: lightblue;
+    margin-top: 2%;
+    border-radius: 5px;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+#send-message > input {
+    margin-right: 10px;
+    width: 50%
+}
+
+#send-message {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: auto;
+    padding-right: auto;
+    display: block;
+    text-align: center;
+}
+
+#chat {
+    width: 60%;
+    display: block;
+    height: 600px;
+    background-color: white;
+    margin-bottom: 1%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: auto;
+    padding-right: auto;
+
+    border-radius: 10px;
+}
+
+#chat > p {
+    padding: 0;
+    margin: 0;
+}
+
+#chat hr {
+    padding: 0;
+    margin: 0;
+}
+
+#screenshot {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    width: 60%;
+    height: 80%;
+    margin-bottom: 1%;
+}
+
+#chatbox {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+    margin-bottom: 1%;
+}
+
+#screenshot-form > button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
